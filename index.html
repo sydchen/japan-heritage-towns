@@ -1,0 +1,2201 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日本 - 重要伝統的建造物群保存地区</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            /* 防止選取 */
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .map-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .score-display {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            z-index: 100;
+            text-align: center;
+            min-width: 120px;
+            animation: bounceIn 0.6s ease-out;
+        }
+
+        .score-title {
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-bottom: 8px;
+            opacity: 0.9;
+        }
+
+        .score-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            line-height: 1;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .score-subtitle {
+            font-size: 0.75em;
+            opacity: 0.8;
+        }
+
+        .settings-button {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            color: white;
+        }
+
+        .settings-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(45deg);
+        }
+
+        .settings-button:active {
+            transform: rotate(45deg) scale(0.9);
+        }
+
+        /* 設定彈出視窗樣式 */
+        .settings-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .settings-modal-overlay.show {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .settings-modal-content {
+            background: #f8f9fa;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            max-width: 380px;
+            width: 90%;
+            padding: 24px;
+            animation: slideIn 0.3s ease;
+        }
+
+        .settings-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding: 0;
+        }
+
+        .settings-modal-header h3 {
+            margin: 0;
+            font-size: 20px;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .settings-modal-close {
+            background: none;
+            border: none;
+            color: #718096;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 0;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .settings-modal-close:hover {
+            background: #e2e8f0;
+            color: #2d3748;
+        }
+
+        .settings-modal-body {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .settings-button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .settings-action-button {
+            background: #4299e1;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 16px 20px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+            gap: 4px;
+            width: 100%;
+        }
+
+        .settings-action-button:hover {
+            background: #3182ce;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(66, 153, 225, 0.3);
+        }
+
+        .settings-action-button.danger {
+            background: #e53e3e;
+        }
+
+        .settings-action-button.danger:hover {
+            background: #c53030;
+            box-shadow: 0 4px 12px rgba(229, 62, 62, 0.3);
+        }
+
+        .settings-action-button.neutral {
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+
+        .settings-action-button.neutral:hover {
+            background: #cbd5e0;
+            box-shadow: 0 4px 12px rgba(226, 232, 240, 0.5);
+        }
+
+        .button-title {
+            font-weight: 500;
+            font-size: 15px;
+            line-height: 1.2;
+            margin: 0;
+        }
+
+        .button-description {
+            font-size: 13px;
+            opacity: 0.9;
+            font-weight: 400;
+            line-height: 1.3;
+            margin: 0;
+        }
+
+        .settings-action-button.neutral .button-description {
+            opacity: 0.7;
+        }
+
+        .button-description {
+            font-size: 11px;
+            opacity: 0.8;
+        }
+
+        .import-file-input {
+            display: none;
+        }
+
+        /* 簡單文化財產詳細視窗 */
+        .simple-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1500;
+        }
+
+        .simple-modal-overlay.show {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .simple-modal-content {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .simple-modal-header {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            border-bottom: 1px solid #e9ecef;
+            border-radius: 10px 10px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .simple-modal-title {
+            margin: 0;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .simple-modal-close {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #6c757d;
+            padding: 0;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .simple-modal-close:hover {
+            color: #2c3e50;
+        }
+
+        .simple-modal-body {
+            padding: 20px;
+        }
+
+        /* 允許彈出視窗內容被選取 */
+        .simple-modal-body * {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+
+        .property-detail {
+            margin-bottom: 15px;
+        }
+
+        .property-label {
+            font-weight: bold;
+            color: #495057;
+            margin-bottom: 5px;
+        }
+
+        .property-value {
+            color: #6c757d;
+            line-height: 1.5;
+        }
+
+        .pop_class {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+        }
+
+        .map_item {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+
+        .map_item td {
+            padding: 4px 6px;
+            vertical-align: top;
+            border: none;
+        }
+
+        .map_item td:first-child {
+            font-weight: bold;
+            color: #333;
+            width: 60px;
+        }
+
+        .map_item td:nth-child(2) {
+            width: 10px;
+            color: #666;
+        }
+
+        .map_item td:last-child {
+            color: #555;
+        }
+
+        .heritage_img img {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .map_popup:hover {
+            background: #0056b3 !important;
+        }
+
+        .map_link:hover {
+            background: #218838 !important;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+            70% {
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes scoreUpdate {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+                color: #ffd700;
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        #japan-map {
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .prefecture {
+            cursor: pointer;
+        }
+
+
+        .info-panel {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            border: 1px solid #e9ecef;
+        }
+
+        .prefecture-info {
+            font-size: 1.2em;
+            color: #495057;
+            text-align: center;
+        }
+
+        .legend {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 5px;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            border-radius: 3px;
+            border: 1px solid #ddd;
+        }
+
+        .legend-text {
+            font-weight: bold;
+            color: #2c3e50;
+            flex-grow: 1;
+        }
+
+        .collapsible-trigger {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .collapsible-trigger:hover {
+            background-color: #e9ecef;
+            transform: translateY(-1px);
+        }
+
+        .collapsible-trigger.active {
+            border: 2px solid;
+            background-color: #f8f9fa;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .collapsible-trigger.active[data-region="hokkaido"] {
+            border-color: #f39c12;
+        }
+
+        .collapsible-trigger.active[data-region="tohoku"] {
+            border-color: #39c0ed;
+        }
+
+        .collapsible-trigger.active[data-region="kanto"] {
+            border-color: #ff6b6b;
+        }
+
+        .collapsible-trigger.active[data-region="chubu"] {
+            border-color: #95e1d3;
+        }
+
+        .collapsible-trigger.active[data-region="kansai"] {
+            border-color: #ffd93d;
+        }
+
+        .collapsible-trigger.active[data-region="chugoku"] {
+            border-color: #bb8fce;
+        }
+
+        .collapsible-trigger.active[data-region="shikoku"] {
+            border-color: #f8c471;
+        }
+
+        .collapsible-trigger.active[data-region="kyushu"] {
+            border-color: #e08766;
+        }
+
+        .collapse-icon {
+            margin-left: auto;
+            transition: transform 0.3s ease;
+            font-size: 0.8em;
+            color: #6c757d;
+        }
+
+        .collapsible-trigger.active .collapse-icon {
+            transform: rotate(180deg);
+        }
+
+        .collapse-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+            background-color: #f8f9fa;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .collapse-content.show {
+            max-height: 2000px; /* 足以容納所有文化財產 */
+            padding: 15px 0;
+        }
+
+        .region-table-container {
+            padding: 0 15px;
+        }
+
+        .region-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9em;
+            background: white;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .region-table th {
+            background: #495057;
+            color: white;
+            padding: 12px 8px;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .region-table td {
+            padding: 10px 8px;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .region-table tbody tr:hover {
+            background-color: #f1f3f4;
+        }
+
+        .prefecture-name {
+            font-weight: bold;
+            color: #495057;
+        }
+
+        .cultural-property-name {
+            color: #2c3e50;
+        }
+
+        .clickable-property {
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .clickable-property:hover {
+            color: #667eea;
+            text-decoration: underline;
+        }
+
+        .cultural-property-type {
+            color: #6c757d;
+            font-style: italic;
+            font-size: 0.85em;
+        }
+
+        .visit-column {
+            text-align: center;
+            width: 80px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            user-select: none;
+            padding: 8px;
+        }
+
+        .visit-column:hover {
+            background-color: #e9ecef;
+        }
+
+        .visit-checkbox {
+            width: 18px;
+            height: 18px;
+            border: 2px solid #6c757d;
+            border-radius: 3px;
+            display: inline-block;
+            position: relative;
+            transition: all 0.3s ease;
+            background-color: white;
+            cursor: pointer;
+        }
+
+        .visit-checkbox:hover {
+            border-color: #667eea;
+            transform: scale(1.1);
+        }
+
+        .visit-checkbox.checked {
+            background-color: #667eea;
+            border-color: #667eea;
+        }
+
+        .visit-checkbox.checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+
+        .copyright-notice {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 1px solid #e9ecef;
+            font-size: 0.9em;
+            color: #6c757d;
+        }
+
+        .copyright-notice p {
+            margin: 8px 0;
+            line-height: 1.5;
+        }
+
+        .copyright-notice strong {
+            color: #495057;
+        }
+
+        .copyright-notice a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .copyright-notice a:hover {
+            text-decoration: underline;
+        }
+
+        .license-note {
+            font-size: 0.85em;
+            font-style: italic;
+            margin-top: 15px !important;
+            padding-top: 15px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        /* 彈出視窗樣式 */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            max-height: 80vh;
+            width: 90%;
+            overflow: hidden;
+            animation: slideIn 0.3s ease;
+        }
+
+        .modal-header {
+            background: #3284ad;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            padding: 0;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .modal-body {
+            padding: 25px;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+
+        /* 允許主彈出視窗內容被選取 */
+        .modal-body * {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+
+        .cultural-properties-list {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        .cultural-property-item {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .cultural-property-item:hover {
+            transform: translateX(5px);
+            background: #e9ecef;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .cultural-property-item:active {
+            transform: translateX(5px) translateY(2px);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .cultural-property-item.clicked {
+            /* 移除背景色改變，保持原樣 */
+        }
+
+        .cultural-property-item.clicked::after {
+            content: "✓";
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .cultural-property-item.clicked:hover {
+            /* 保持與普通hover相同的效果 */
+            transform: translateX(5px);
+            background: #e9ecef;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .property-name {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .property-type {
+            color: #667eea;
+            font-size: 0.9em;
+            font-style: italic;
+        }
+
+        .no-properties {
+            text-align: center;
+            color: #6c757d;
+            font-style: italic;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .map-container {
+                margin: 10px 0;
+            }
+
+            .modal-content {
+                width: 95%;
+                max-height: 85vh;
+            }
+
+            .modal-header {
+                padding: 15px;
+            }
+
+            .modal-header h2 {
+                font-size: 1.3em;
+            }
+
+            .modal-body {
+                padding: 20px;
+            }
+
+            .score-display {
+                top: 8px;
+                left: 8px;
+                padding: 8px 12px;
+                min-width: 80px;
+                border-radius: 10px;
+            }
+
+            .score-title {
+                font-size: 0.7em;
+                margin-bottom: 4px;
+            }
+
+            .score-value {
+                font-size: 1.5em;
+                margin-bottom: 3px;
+            }
+
+            .score-subtitle {
+                font-size: 0.6em;
+            }
+
+            .settings-button {
+                width: 20px;
+                height: 20px;
+                top: 6px;
+                right: 6px;
+                font-size: 10px;
+            }
+
+        }
+
+        @media (max-width: 480px) {
+            .score-display {
+                top: 5px;
+                left: 5px;
+                padding: 6px 10px;
+                min-width: 70px;
+                border-radius: 8px;
+            }
+
+            .score-title {
+                font-size: 0.6em;
+                margin-bottom: 3px;
+            }
+
+            .score-value {
+                font-size: 1.3em;
+                margin-bottom: 2px;
+            }
+
+            .score-subtitle {
+                font-size: 0.55em;
+            }
+
+            .settings-button {
+                width: 18px;
+                height: 18px;
+                top: 4px;
+                right: 4px;
+                font-size: 9px;
+            }
+
+
+            h1 {
+                font-size: 1.5em;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>日本 -  重要伝統的建造物群保存地区</h1>
+
+        <div class="map-container">
+            <svg id="japan-map" width="1800" height="1400">
+                <!-- 地圖將由D3.js動態載入 -->
+            </svg>
+        </div>
+
+        <div class="info-panel">
+            <div class="prefecture-info" id="prefecture-info">
+                地図にマウスを移動すると都道府県の情報が表示されます
+            </div>
+        </div>
+
+        <!-- 彈出視窗 -->
+        <div id="modal-overlay" class="modal-overlay">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="modal-title">都道府縣文化財產</h2>
+                    <button class="modal-close" id="modal-close">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div id="modal-text" class="cultural-properties-list">
+                        <!-- 文化財產清單將在此顯示 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item collapsible-trigger" data-region="hokkaido">
+                <div class="legend-color" style="background-color: #f39c12;"></div>
+                <span class="legend-text">北海道地方</span>
+                <span class="collapse-icon">▼</span>
+            </div>
+
+            <div class="legend-item collapsible-trigger" data-region="tohoku">
+                <div class="legend-color" style="background-color: #39c0ed;"></div>
+                <span class="legend-text">東北地方</span>
+                <span class="collapse-icon">▼</span>
+            </div>
+
+            <div class="legend-item collapsible-trigger" data-region="kanto">
+                <div class="legend-color" style="background-color: #ff6b6b;"></div>
+                <span class="legend-text">関東地方</span>
+                <span class="collapse-icon">▼</span>
+            </div>
+
+            <div class="legend-item collapsible-trigger" data-region="chubu">
+                <div class="legend-color" style="background-color: #95e1d3;"></div>
+                <span class="legend-text">中部地方</span>
+                <span class="collapse-icon">▼</span>
+            </div>
+
+            <div class="legend-item collapsible-trigger" data-region="kansai">
+                <div class="legend-color" style="background-color: #ffd93d;"></div>
+                <span class="legend-text">近畿地方</span>
+                <span class="collapse-icon">▼</span>
+            </div>
+
+            <div class="legend-item collapsible-trigger" data-region="chugoku">
+                <div class="legend-color" style="background-color: #bb8fce;"></div>
+                <span class="legend-text">中国地方</span>
+                <span class="collapse-icon">▼</span>
+            </div>
+
+            <div class="legend-item collapsible-trigger" data-region="shikoku">
+                <div class="legend-color" style="background-color: #f8c471;"></div>
+                <span class="legend-text">四国地方</span>
+                <span class="collapse-icon">▼</span>
+            </div>
+
+            <div class="legend-item collapsible-trigger" data-region="kyushu">
+                <div class="legend-color" style="background-color: #e08766;"></div>
+                <span class="legend-text">九州地方</span>
+                <span class="collapse-icon">▼</span>
+            </div>
+        </div>
+
+        <!-- 統一的摺疊內容區域 -->
+        <div class="collapse-content" id="unified-collapse">
+            <div class="region-table-container">
+                <table class="region-table" id="unified-table"></table>
+            </div>
+        </div>
+
+        <!-- 設定彈出視窗 -->
+        <div id="settings-modal-overlay" class="settings-modal-overlay">
+            <div class="settings-modal-content">
+                <div class="settings-modal-header">
+                    <h3>設定</h3>
+                    <button class="settings-modal-close" id="settings-modal-close">&times;</button>
+                </div>
+                <div class="settings-modal-body">
+                    <div class="settings-button-group">
+                        <button class="settings-action-button" id="export-progress-button">
+                            <div class="button-title">探索記録をエクスポート</div>
+                            <div class="button-description">探索進行状況をファイルに保存</div>
+                        </button>
+
+                        <button class="settings-action-button neutral" id="import-progress-button">
+                            <div class="button-title">探索記録をインポート</div>
+                            <div class="button-description">ファイルから探索進行状況を復元</div>
+                        </button>
+
+                        <button class="settings-action-button danger" id="reset-progress-button">
+                            <div class="button-title">重置所有進度</div>
+                            <div class="button-description">すべての探索記録とスコアをリセット</div>
+                        </button>
+                    </div>
+                    <input type="file" class="import-file-input" id="import-file-input" accept=".json" />
+                </div>
+            </div>
+        </div>
+
+        <!-- 簡單文化財產詳細視窗 -->
+        <div id="simple-modal-overlay" class="simple-modal-overlay">
+            <div class="simple-modal-content">
+                <div class="simple-modal-header">
+                    <h3 class="simple-modal-title" id="simple-modal-title">文化財產詳細資訊</h3>
+                    <button class="simple-modal-close" id="simple-modal-close">&times;</button>
+                </div>
+                <div class="simple-modal-body" id="simple-modal-body">
+                    <!-- 內容將動態載入 -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Copyright Notice -->
+        <div class="copyright-notice">
+            <p><strong>データソース：</strong></p>
+            <p>• 重要伝統的建造物群保存地区データ：<a href="https://bunka.go.jp/" target="_blank">文化庁</a></p>
+            <p>• 行政区域データ：<a href="https://gadm.org/" target="_blank">GADM (Global Administrative Areas)</a></p>
+            <p class="license-note">※ 文化庁データは政府標準利用規約（第2.0版）に準拠して使用</p>
+        </div>
+    </div>
+
+    <script>
+        // 計分系統變數
+        let score = 0;
+        let clickedProperties = new Set();
+
+        // 從localStorage載入保存的數據
+        function loadSavedData() {
+            const savedScore = localStorage.getItem('japanMapScore');
+            const savedProperties = localStorage.getItem('japanMapClickedProperties');
+
+            if (savedScore !== null) {
+                score = parseInt(savedScore, 10);
+                // 分數會在SVG創建後更新
+            }
+
+            if (savedProperties !== null) {
+                const propertiesArray = JSON.parse(savedProperties);
+                clickedProperties = new Set(propertiesArray);
+            }
+        }
+
+        // 保存數據到localStorage
+        function saveData() {
+            localStorage.setItem('japanMapScore', score.toString());
+            localStorage.setItem('japanMapClickedProperties', JSON.stringify([...clickedProperties]));
+        }
+
+        // 更新分數顯示
+        function updateScore() {
+            const scoreElement = svg.select('#svg-score-value');
+            if (!scoreElement.empty()) {
+                scoreElement.text(score);
+                // SVG動畫效果
+                scoreElement
+                    .transition()
+                    .duration(500)
+                    .attr('font-size', '36px')
+                    .attr('fill', '#ffd700')
+                    .transition()
+                    .duration(300)
+                    .attr('font-size', '32px')
+                    .attr('fill', '#194EEF');
+            }
+
+            // 更新圖例統計
+            updateLegendStats();
+
+            // 保存到localStorage
+            saveData();
+        }
+
+        // 重置分數和點擊狀態
+        function resetScore() {
+            if (confirm('確定要重置所有分數嗎？這將清除您的所有探索記錄。')) {
+                score = 0;
+                clickedProperties.clear();
+                localStorage.removeItem('japanMapScore');
+                localStorage.removeItem('japanMapClickedProperties');
+                const scoreElement = svg.select('#svg-score-value');
+                if (!scoreElement.empty()) {
+                    scoreElement.text('0');
+                }
+
+                // 更新地圖顏色為初始狀態
+                updateMapColors();
+
+                // 更新table狀態
+                updateTableCheckboxes();
+
+                // 更新圖例統計
+                updateLegendStats();
+
+                // 如果有打開的彈出視窗，重新載入內容
+                const modal = document.getElementById('modal-overlay');
+                if (modal.classList.contains('show')) {
+                    hideModal();
+                }
+            }
+        }
+
+        // 頁面載入時恢復保存的數據
+        loadSavedData();
+
+        // 動態計算地圖尺寸 - 1.5倍放大
+        function calculateMapSize() {
+            const container = document.querySelector('.map-container');
+            const containerWidth = container.clientWidth - 40; // 減去 padding
+
+            // 增加高度確保地圖上方部分完整顯示：1200 -> 1400
+            let width = Math.min(containerWidth, 1800);
+            let height = Math.min(width * 0.78, 1400); // 調整比例並增加最大高度
+
+            // 如果寬度受限，保持新的寬高比
+            if (width < 1800) {
+                height = width * 0.78; // 更高的比例
+            }
+
+            return {
+                width: Math.floor(width),
+                height: Math.floor(height)
+            };
+        }
+
+        // 設定SVG尺寸和投影
+        const svg = d3.select("#japan-map");
+        let { width, height } = calculateMapSize();
+
+        // 更新SVG尺寸
+        svg.attr('width', width).attr('height', height);
+
+        // 設定地圖投影 - 移除南方島嶼後可以稍微放大
+        // 由於移除了沖繩等南方島嶼，地圖範圍更集中
+        const baseScale = 4800; // 稍微放大以更好利用canvas空間
+        const scale = baseScale * (width / 1800);
+
+        const projection = d3.geoMercator()
+            .center([138, 36]) // 調整到本州中心位置
+            .scale(scale)
+            .translate([width / 2 + 30, height / 2 + 60]); // 往右下移動，增加往下的距離
+
+        const path = d3.geoPath().projection(projection);
+        const infoDisplay = document.getElementById('prefecture-info');
+
+
+
+        // 都道府縣地區對應
+        const prefectureRegions = {
+            'Hokkaido': 'hokkaido',
+            'Aomori': 'tohoku', 'Iwate': 'tohoku', 'Miyagi': 'tohoku', 'Akita': 'tohoku', 'Yamagata': 'tohoku', 'Fukushima': 'tohoku',
+            'Ibaraki': 'kanto', 'Tochigi': 'kanto', 'Gunma': 'kanto', 'Saitama': 'kanto', 'Chiba': 'kanto', 'Tokyo': 'kanto', 'Kanagawa': 'kanto',
+            'Niigata': 'chubu', 'Toyama': 'chubu', 'Ishikawa': 'chubu', 'Fukui': 'chubu', 'Yamanashi': 'chubu', 'Nagano': 'chubu', 'Gifu': 'chubu', 'Shizuoka': 'chubu', 'Aichi': 'chubu',
+            'Mie': 'kansai', 'Shiga': 'kansai', 'Kyoto': 'kansai', 'Osaka': 'kansai', 'Hyōgo': 'kansai', 'Nara': 'kansai', 'Wakayama': 'kansai',
+            'Tottori': 'chugoku', 'Shimane': 'chugoku', 'Okayama': 'chugoku', 'Hiroshima': 'chugoku', 'Yamaguchi': 'chugoku',
+            'Tokushima': 'shikoku', 'Kagawa': 'shikoku', 'Ehime': 'shikoku', 'Kochi': 'shikoku',
+            'Fukuoka': 'kyushu', 'Saga': 'kyushu', 'Nagasaki': 'kyushu', 'Kumamoto': 'kyushu', 'Oita': 'kyushu', 'Miyazaki': 'kyushu', 'Kagoshima': 'kyushu', 'Okinawa': 'kyushu'
+        };
+
+        // 地區顏色
+        const regionColors = {
+            'hokkaido': '#f39c12',
+            'tohoku': '#39c0ed',
+            'kanto': '#ff6b6b',
+            'chubu': '#95e1d3',
+            'kansai': '#ffd93d',
+            'chugoku': '#bb8fce',
+            'shikoku': '#f8c471',
+            'kyushu': '#e08766'
+        };
+
+        // 英文地區名轉日文
+        const regionNamesJapanese = {
+            'hokkaido': '北海道地方',
+            'tohoku': '東北地方',
+            'kanto': '関東地方',
+            'chubu': '中部地方',
+            'kansai': '近畿地方',
+            'chugoku': '中国地方',
+            'shikoku': '四国地方',
+            'kyushu': '九州地方'
+        };
+
+        // 日文都道府縣名稱對應英文名稱
+        const japaneseToEnglish = {
+            '北海道': 'Hokkaido',
+            '青森県': 'Aomori', '岩手県': 'Iwate', '宮城県': 'Miyagi', '秋田県': 'Akita', '山形県': 'Yamagata', '福島県': 'Fukushima',
+            '茨城県': 'Ibaraki', '栃木県': 'Tochigi', '群馬県': 'Gunma', '埼玉県': 'Saitama', '千葉県': 'Chiba', '東京都': 'Tokyo', '神奈川県': 'Kanagawa',
+            '新潟県': 'Niigata', '富山県': 'Toyama', '石川県': 'Ishikawa', '福井県': 'Fukui', '山梨県': 'Yamanashi', '長野県': 'Nagano', '岐阜県': 'Gifu', '静岡県': 'Shizuoka', '愛知県': 'Aichi',
+            '三重県': 'Mie', '滋賀県': 'Shiga', '京都府': 'Kyoto', '大阪府': 'Osaka', '兵庫県': 'Hyōgo', '奈良県': 'Nara', '和歌山県': 'Wakayama',
+            '鳥取県': 'Tottori', '島根県': 'Shimane', '岡山県': 'Okayama', '広島県': 'Hiroshima', '山口県': 'Yamaguchi',
+            '徳島県': 'Tokushima', '香川県': 'Kagawa', '愛媛県': 'Ehime', '高知県': 'Kochi',
+            '福岡県': 'Fukuoka', '佐賀県': 'Saga', '長崎県': 'Nagasaki', '熊本県': 'Kumamoto', '大分県': 'Oita', '宮崎県': 'Miyazaki', '鹿児島県': 'Kagoshima', '沖縄県': 'Okinawa'
+        };
+
+        // 存儲文化財產資料
+        let culturalPropertiesData = {};
+
+        // 同時載入 GeoJSON 和 CSV 資料
+        Promise.all([
+            d3.json('gadm41_JPN_1.json'),
+            d3.csv('cultural_properties.csv')
+        ]).then(function([japan, csvData]) {
+
+            // 處理 CSV 資料，建立都道府縣對應的文化財產
+            csvData.forEach(function(d) {
+                const englishName = japaneseToEnglish[d.都道府県];
+                if (englishName) {
+                    if (!culturalPropertiesData[englishName]) {
+                        culturalPropertiesData[englishName] = [];
+                    }
+                    culturalPropertiesData[englishName].push({
+                        name: d.名称,
+                        type: d.種別,
+                        prefecture: d.都道府県,
+                        latitude: d.緯度,
+                        longitude: d.経度,
+                        description: d.解説文 || '', // 解説文欄位
+                        imageFileName: d.image_file_name || '', // 本地圖片檔案名稱
+                        imageCopyright: d.image_copyright || '' // 圖片版權欄位
+                    });
+                }
+            });
+
+
+            // 過濾掉小島嶼和鹿兒島縣南方島嶼
+            const filteredFeatures = japan.features.map(function(feature) {
+                if (feature.geometry.type === 'MultiPolygon') {
+                    // 過濾掉面積過小的島嶼，以及位置過於偏南的島嶼
+                    const largePolygons = feature.geometry.coordinates.filter(function(polygon) {
+                        const area = d3.geoArea({type: 'Polygon', coordinates: polygon});
+
+                        // 檢查多邊形的中心位置
+                        const centroid = d3.geoCentroid({type: 'Polygon', coordinates: polygon});
+                        const latitude = centroid[1];
+
+                        // 過濾條件：過濾面積太小的島嶼和鹿兒島縣南方島嶼
+                        if (area <= 0.00001) return false; // 過濾面積太小的島嶼
+
+                        // 如果是鹿兒島縣，過濾掉緯度30°21'31"以南的島嶼
+                        if (feature.properties.NAME_1 === 'Kagoshima' && latitude < 30.358611) {
+                            return false;
+                        }
+
+                        return true;
+                    });
+
+                    if (largePolygons.length > 0) {
+                        return {
+                            ...feature,
+                            geometry: {
+                                ...feature.geometry,
+                                coordinates: largePolygons
+                            }
+                        };
+                    }
+                }
+                return feature;
+            }).filter(Boolean);
+
+            // 創建探索得分顯示（在SVG內部）
+            const scoreGroup = svg.append('g')
+                .attr('class', 'score-group')
+                .attr('transform', 'translate(20, 20)'); // 使用transform設定位置
+
+            // 定義分數區域的尺寸（現在所有子元素都是相對位置）
+            const scoreRect = {
+                x: 0,  // 相對於scoreGroup的位置
+                y: 0,
+                width: 160,
+                height: 110
+            };
+
+            // 背景矩形
+            scoreGroup.append('rect')
+                .attr('x', scoreRect.x)
+                .attr('y', scoreRect.y)
+                .attr('width', scoreRect.width)
+                .attr('height', scoreRect.height)
+                .attr('rx', 12)
+                .attr('fill', '#f7fafc')
+                .attr('stroke', '#e2e8f0')
+                .attr('stroke-width', 1)
+                .style('filter', 'drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1))');
+
+            // 定義漸變（保留以防其他地方使用）
+            const defs = svg.append('defs');
+            const gradient = defs.append('linearGradient')
+                .attr('id', 'scoreGradient')
+                .attr('x1', '0%')
+                .attr('y1', '0%')
+                .attr('x2', '100%')
+                .attr('y2', '100%');
+
+            gradient.append('stop')
+                .attr('offset', '0%')
+                .attr('stop-color', '#3284ad');
+
+            gradient.append('stop')
+                .attr('offset', '100%')
+                .attr('stop-color', '#3284ad');
+
+            // 標題文字
+            scoreGroup.append('text')
+                .attr('x', scoreRect.width / 2)
+                .attr('y', 25)
+                .attr('text-anchor', 'middle')
+                .attr('fill', '#4a5568')
+                .attr('font-size', '15px')
+                .attr('font-weight', '500')
+                .text('探索スコア');
+
+            // 分數數字
+            scoreGroup.append('text')
+                .attr('x', scoreRect.width / 2)
+                .attr('y', 60)
+                .attr('text-anchor', 'middle')
+                .attr('fill', '#194EEF')
+                .attr('font-size', '32px')
+                .attr('font-weight', '700')
+                .attr('id', 'svg-score-value')
+                .text('0');
+
+            // 副標題
+            scoreGroup.append('text')
+                .attr('x', scoreRect.width / 2)
+                .attr('y', 85)
+                .attr('text-anchor', 'middle')
+                .attr('fill', '#718096')
+                .attr('font-size', '12px')
+                .attr('font-weight', '400')
+                .text('発見済み文化財');
+
+            // 設定按鈕
+            const settingsButton = scoreGroup.append('g')
+                .attr('class', 'settings-button-svg')
+                .style('cursor', 'pointer');
+
+            // 設定按鈕位置 - 使用相對位置
+            const settingsButtonX = scoreRect.width - 15; // 距離右邊15px
+            const settingsButtonY = 15; // 距離上邊15px
+
+            settingsButton.append('circle')
+                .attr('cx', settingsButtonX)
+                .attr('cy', settingsButtonY)
+                .attr('r', 11)
+                .attr('fill', '#f7fafc')
+                .attr('stroke', '#e2e8f0')
+                .attr('stroke-width', 1);
+
+            settingsButton.append('text')
+                .attr('x', settingsButtonX)
+                .attr('y', settingsButtonY + 5)
+                .attr('text-anchor', 'middle')
+                .attr('fill', '#4a5568')
+                .attr('font-size', '11px')
+                .text('⋯');
+
+            // 設定按鈕點擊事件
+            settingsButton.on('click', function() {
+                showSettingsModal();
+            });
+
+            // 繪製都道府縣
+            const mapGroup = svg.append('g')
+                .attr('transform', `rotate(15, ${width / 2}, ${height / 2})`); // 保持原本的15度旋轉
+
+            mapGroup.selectAll('path')
+                .data(filteredFeatures)
+                .enter()
+                .append('path')
+                .attr('d', function(d) {
+                    // 沖繩特殊處理：放在九州東南方
+                    if (d.properties.NAME_1 === 'Okinawa') {
+                        // 為沖繩創建特殊投影，放在九州東南方
+                        // 計算指定位置的投影座標
+                        const targetPos = projection([129.3747222, 28.8263889]); // 28°49'35.0"N 129°22'29.0"E
+                        const okinawaProjection = d3.geoMercator()
+                            .center([127.5, 26.5]) // 沖繩的中心座標
+                            .scale(scale * 0.8) // 適當縮小顯示
+                            .translate(targetPos); // 使用指定的座標位置
+
+                        const okinawaPath = d3.geoPath().projection(okinawaProjection);
+                        return okinawaPath(d);
+                    }
+                    // 奄美群島和其他地區使用正常投影
+                    return path(d);
+                })
+                .attr('class', 'prefecture')
+                .attr('fill', '#f8f9fa') // 初始顏色為白色
+                .attr('stroke', '#2c3e50')
+                .attr('stroke-width', 1)
+                .style('cursor', 'pointer')
+                .on('mouseenter', function(event, d) {
+                    const prefectureName = d.properties.NAME_1;
+                    const region = prefectureRegions[prefectureName];
+                    const regionJapanese = region ? regionNamesJapanese[region] : '未知';
+
+                    infoDisplay.innerHTML = `
+                        <strong>${d.properties.NL_NAME_1 || prefectureName}</strong><br>
+                        英文名：${prefectureName}<br>
+                        地區：${regionJapanese}
+                    `;
+                })
+                .on('mouseleave', function(event, d) {
+                    infoDisplay.innerHTML = '地図にマウスを移動すると都道府県の情報が表示されます';
+                })
+                .on('click', function(event, d) {
+                    const prefectureName = d.properties.NAME_1; // English name
+                    const properties = culturalPropertiesData[prefectureName] || [];
+                    showModal(d.properties.NL_NAME_1 || prefectureName, properties, prefectureName);
+                });
+
+            // 地圖繪製完成後，根據保存的數據恢復地圖顏色
+            updateMapColors();
+
+            // 更新SVG中的分數顯示
+            const scoreElement = svg.select('#svg-score-value');
+            if (!scoreElement.empty()) {
+                scoreElement.text(score);
+            }
+
+            // 初始化圖例統計
+            updateLegendStats();
+        }).catch(function(error) {
+            console.error('載入資料失敗:', error);
+            infoDisplay.innerHTML = '地圖或文化財產資料載入失敗，請檢查檔案';
+        });
+
+
+        // 響應式調整
+        function resize() {
+            const newSize = calculateMapSize();
+            const newWidth = newSize.width;
+            const newHeight = newSize.height;
+
+            // 更新SVG尺寸
+            svg.attr('width', newWidth)
+               .attr('height', newHeight);
+
+            // 重新計算投影縮放和位置
+            const newScale = 4800 * (newWidth / 1800); // 使用相同的縮放比例
+            projection.scale(newScale)
+                     .translate([newWidth / 2 + 30, newHeight / 2 + 60]); // 往右下移動，增加往下的距離
+
+            // 更新所有路徑
+            svg.selectAll('path.prefecture')
+               .attr('d', function(d) {
+                   // 沖繩特殊處理：放在九州東南方
+                   if (d.properties.NAME_1 === 'Okinawa') {
+                       // 為沖繩創建特殊投影，放在指定位置
+                       const newTargetPos = projection([129.3747222, 28.8263889]); // 28°49'35.0"N 129°22'29.0"E
+                       const okinawaProjection = d3.geoMercator()
+                           .center([127.5, 26.5]) // 沖繩的中心座標
+                           .scale(newScale * 0.8) // 適當縮小顯示
+                           .translate(newTargetPos); // 使用指定的座標位置
+
+                       const okinawaPath = d3.geoPath().projection(okinawaProjection);
+                       return okinawaPath(d);
+                   }
+                   // 奄美群島和其他地區使用正常投影
+                   return path(d);
+               });
+
+            // 更新全域變數
+            width = newWidth;
+            height = newHeight;
+
+
+            // 更新地圖群組的旋轉中心點
+            svg.selectAll('g').each(function() {
+                const group = d3.select(this);
+                if (group.classed('score-group')) {
+                    // score-group 保持固定位置，不需要更新
+                    return;
+                } else if (!group.classed('settings-button-svg')) {
+                    // 只對非設定按鈕的群組更新地圖旋轉
+                    group.attr('transform', `rotate(15, ${newWidth / 2}, ${newHeight / 2})`);
+                }
+                // settings-button-svg 群組不做任何變換，保持在 score-group 內的相對位置
+            });
+
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+
+        // 彈出視窗控制函數
+        function showModal(prefectureDisplayName, properties, englishPrefectureName) {
+            const modal = document.getElementById('modal-overlay');
+            const modalTitle = document.getElementById('modal-title');
+            const modalText = document.getElementById('modal-text');
+
+            modalTitle.textContent = `${prefectureDisplayName} - 重要傳統建築物群保存地區`;
+
+            if (properties.length > 0) {
+                let content = '';
+                properties.forEach(function(property, index) {
+                    // 使用日文縣名-文化財產名稱來生成propertyId，確保與table一致
+                    const propertyId = `${property.prefecture}-${property.name}`;
+                    const isClicked = clickedProperties.has(propertyId);
+                    const clickedClass = isClicked ? 'clicked' : '';
+
+                    content += `
+                        <div class="cultural-property-item ${clickedClass}" data-property-id="${propertyId}"
+                             data-property-name="${property.name}" data-prefecture="${property.prefecture}"
+                             data-property-type="${property.type}" data-description="${property.description || ''}"
+                             data-image-file-name="${property.imageFileName || ''}" data-image-copyright="${property.imageCopyright || ''}">
+                            <div class="property-name"><span class="clickable-name" style="cursor: pointer; text-decoration: underline;">${property.name}</span></div>
+                            <div class="property-type">${property.type}</div>
+                        </div>
+                    `;
+                });
+                modalText.innerHTML = content;
+
+                // 為文化財產名稱添加點擊事件（打開詳細視窗）
+                modalText.querySelectorAll('.clickable-name').forEach(function(nameElement) {
+                    nameElement.addEventListener('click', function(e) {
+                        e.stopPropagation(); // 阻止事件冒泡
+                        const item = this.closest('.cultural-property-item');
+                        const propertyName = item.getAttribute('data-property-name');
+                        const prefecture = item.getAttribute('data-prefecture');
+                        const propertyType = item.getAttribute('data-property-type');
+                        const description = item.getAttribute('data-description');
+                        const imageFileName = item.getAttribute('data-image-file-name');
+                        const imageCopyright = item.getAttribute('data-image-copyright');
+
+                        showSimpleModal(propertyName, prefecture, propertyType, description, imageFileName, imageCopyright);
+                    });
+                });
+
+                // 為每個文化財產項目添加點擊事件（分數功能）
+                modalText.querySelectorAll('.cultural-property-item').forEach(function(item) {
+                    item.addEventListener('click', function(e) {
+                        // 如果點擊的是名稱，不執行分數邏輯
+                        if (e.target.classList.contains('clickable-name')) {
+                            return;
+                        }
+
+                        const propertyId = this.getAttribute('data-property-id');
+
+                        if (!clickedProperties.has(propertyId)) {
+                            // 第一次點擊該項目，加分
+                            clickedProperties.add(propertyId);
+                            this.classList.add('clicked');
+                            score++;
+                            updateScore();
+                        } else {
+                            // 已點擊過的項目，取消選擇並扣分
+                            clickedProperties.delete(propertyId);
+                            this.classList.remove('clicked');
+                            score--;
+                            updateScore();
+                        }
+
+                        // 同步更新table中的checkbox狀態、地圖顏色和圖例統計
+                        updateTableCheckboxes();
+                        updateMapColors();
+                        updateLegendStats();
+                    });
+                });
+            } else {
+                modalText.innerHTML = `
+                    <div class="no-properties">
+                        此都道府縣沒有登錄的重要傳統建築物群保存地區
+                    </div>
+                `;
+            }
+
+            modal.classList.add('show');
+        }
+
+        function hideModal() {
+            const modal = document.getElementById('modal-overlay');
+            modal.classList.remove('show');
+        }
+
+        // 關閉按鈕事件
+        document.getElementById('modal-close').addEventListener('click', hideModal);
+
+        // 點擊背景關閉
+        document.getElementById('modal-overlay').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideModal();
+            }
+        });
+
+        // 簡單文化財產詳細視窗控制
+        function showSimpleModal(propertyName, prefecture, propertyType, description, imageFileName, imageCopyright) {
+            const modal = document.getElementById('simple-modal-overlay');
+            const title = document.getElementById('simple-modal-title');
+            const body = document.getElementById('simple-modal-body');
+
+            title.textContent = propertyName;
+
+            // 從CSV數據中找到對應的經緯度
+            let latitude = '';
+            let longitude = '';
+
+            // 在culturalPropertiesData中尋找匹配的項目
+            for (let prefKey in culturalPropertiesData) {
+                const properties = culturalPropertiesData[prefKey];
+                const foundProperty = properties.find(p => p.name === propertyName && p.prefecture === prefecture);
+                if (foundProperty && foundProperty.latitude && foundProperty.longitude) {
+                    latitude = foundProperty.latitude;
+                    longitude = foundProperty.longitude;
+                    break;
+                }
+            }
+
+            // 生成Google Maps連結
+            let mapLink = '';
+            if (latitude && longitude) {
+                mapLink = `https://www.google.com/maps?q=${latitude},${longitude}&z=15`;
+            }
+
+            body.innerHTML = `
+                <div class="pop_class">
+                    ${imageFileName ? `
+                    <div style="margin: 0 0 15px 0; text-align: center;">
+                        <img src="images/${imageFileName}"
+                             style="max-width: 100%; max-height: 300px; border: 1px solid #ddd; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);"
+                             oncontextmenu="return false;"
+                             onerror="this.style.display='none';"
+                             alt="${propertyName}の画像">
+                        ${imageCopyright && imageCopyright !== '自由引用' ? `
+                        <div style="margin-top: 8px; font-size: 12px; color: #6c757d; font-style: italic;">
+                            写真提供：${imageCopyright}
+                        </div>
+                        ` : ''}
+                    </div>
+                    ` : ''}
+                    <table class="map_item">
+                        <tbody>
+                            <tr><td>名称</td><td>：</td><td>${propertyName}</td></tr>
+                            <tr><td>所在地</td><td>：</td><td>${prefecture}</td></tr>
+                            <tr><td>種別</td><td>：</td><td>${propertyType}</td></tr>
+                        </tbody>
+                    </table>
+                    ${description ? `
+                    <div style="margin: 15px 0; padding: 12px; background: #f8f9fa; border-radius: 6px; border-left: 4px solid #667eea;">
+                        <p style="margin: 0; line-height: 1.6; color: #495057; font-size: 13px;">${description}</p>
+                    </div>
+                    ` : ''}
+                    ${mapLink ? `
+                    <div style="text-align: center;">
+                        <a href="${mapLink}" target="_blank" class="map_link"
+                           style="display: inline-block; padding: 12px 20px; background: #667eea; color: white; text-decoration: none; border-radius: 6px; font-size: 14px; font-weight: bold;">
+                            地図で表示
+                        </a>
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+
+            modal.classList.add('show');
+        }
+
+        function hideSimpleModal() {
+            document.getElementById('simple-modal-overlay').classList.remove('show');
+        }
+
+        // 簡單視窗關閉事件
+        document.getElementById('simple-modal-close').addEventListener('click', hideSimpleModal);
+
+        // 點擊背景關閉簡單視窗
+        document.getElementById('simple-modal-overlay').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideSimpleModal();
+            }
+        });
+
+        // ESC鍵關閉
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const settingsModal = document.getElementById('settings-modal-overlay');
+                const culturalModal = document.getElementById('modal-overlay');
+                const simpleModal = document.getElementById('simple-modal-overlay');
+
+                if (settingsModal.classList.contains('show')) {
+                    hideSettingsModal();
+                } else if (simpleModal.classList.contains('show')) {
+                    hideSimpleModal();
+                } else if (culturalModal.classList.contains('show')) {
+                    hideModal();
+                }
+            }
+        });
+
+        // 設定彈出視窗控制
+        function showSettingsModal() {
+            document.getElementById('settings-modal-overlay').classList.add('show');
+        }
+
+        function hideSettingsModal() {
+            document.getElementById('settings-modal-overlay').classList.remove('show');
+        }
+
+
+        // 設定彈出視窗關閉事件
+        document.getElementById('settings-modal-close').addEventListener('click', hideSettingsModal);
+
+        // 點擊背景關閉設定彈出視窗
+        document.getElementById('settings-modal-overlay').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideSettingsModal();
+            }
+        });
+
+        // 探索記録をエクスポート
+        function exportProgress() {
+            const exportData = {
+                score: score,
+                clickedProperties: [...clickedProperties],
+                exportDate: new Date().toISOString(),
+                version: '1.0'
+            };
+
+            const dataStr = JSON.stringify(exportData, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(dataBlob);
+            link.download = `japan-cultural-properties-progress-${new Date().toISOString().split('T')[0]}.json`;
+            link.click();
+
+            URL.revokeObjectURL(link.href);
+        }
+
+        // 探索記録をインポート
+        function importProgress(file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const importData = JSON.parse(e.target.result);
+
+                    // 驗證數據格式
+                    if (!importData.score && importData.score !== 0) {
+                        throw new Error('無效的數據格式：缺少分數資訊');
+                    }
+                    if (!Array.isArray(importData.clickedProperties)) {
+                        throw new Error('無效的數據格式：缺少點擊記錄');
+                    }
+
+                    // 確認是否覆蓋現有數據
+                    const confirmMessage = `探索記録をインポートしますか？\n\n現在のデータを上書きします：\n現在のスコア：${score}\nインポートスコア：${importData.score}\nエクスポート日付：${importData.exportDate ? new Date(importData.exportDate).toLocaleString() : '不明'}`;
+
+                    if (confirm(confirmMessage)) {
+                        // 恢復數據
+                        score = importData.score;
+                        clickedProperties = new Set(importData.clickedProperties);
+
+                        // 更新顯示
+                        const scoreElement = svg.select('#svg-score-value');
+                        if (!scoreElement.empty()) {
+                            scoreElement.text(score);
+                        }
+                        updateMapColors();
+                        updateTableCheckboxes();
+                        updateLegendStats();
+
+                        // 保存到localStorage
+                        saveData();
+
+                        // 關閉彈出視窗
+                        const modal = document.getElementById('modal-overlay');
+                        if (modal.classList.contains('show')) {
+                            hideModal();
+                        }
+
+                        alert('インポート成功！探索記録を復元しました。');
+                    }
+                } catch (error) {
+                    alert('インポート失敗：' + error.message + '\n\nファイル形式を確認してください。');
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        // 設定彈出視窗內的按鈕事件
+        document.getElementById('export-progress-button').addEventListener('click', function() {
+            exportProgress();
+            hideSettingsModal();
+        });
+
+        document.getElementById('import-progress-button').addEventListener('click', function() {
+            document.getElementById('import-file-input').click();
+        });
+
+        document.getElementById('reset-progress-button').addEventListener('click', function() {
+            resetScore();
+            hideSettingsModal();
+        });
+
+        // 檔案選擇事件
+        document.getElementById('import-file-input').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                importProgress(file);
+                hideSettingsModal();
+                // 清除檔案選擇，以便下次可以選擇同一檔案
+                e.target.value = '';
+            }
+        });
+
+        // 更新table中checkbox狀態的函數
+        function updateTableCheckboxes() {
+            const table = document.getElementById('unified-table');
+            if (table) {
+                const visitColumns = table.querySelectorAll('.visit-column');
+                visitColumns.forEach(function(visitCell) {
+                    const propertyId = visitCell.getAttribute('data-property-id');
+                    const checkbox = visitCell.querySelector('.visit-checkbox');
+
+                    if (propertyId && checkbox) {
+                        if (clickedProperties.has(propertyId)) {
+                            checkbox.classList.add('checked');
+                        } else {
+                            checkbox.classList.remove('checked');
+                        }
+                    }
+                });
+            }
+        }
+
+        // 檢查某個縣是否有被訪問過的文化財產
+        function hasVisitedPropertiesInPrefecture(prefectureName) {
+            const properties = culturalPropertiesData[prefectureName] || [];
+
+            for (let property of properties) {
+                const propertyId = `${property.prefecture}-${property.name}`;
+                if (clickedProperties.has(propertyId)) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        // 計算每個地區的拜訪統計
+        function getRegionStats(region) {
+            // 按地區整理都道府縣
+            const regionPrefectures = {
+                'hokkaido': ['Hokkaido'],
+                'tohoku': ['Aomori', 'Iwate', 'Miyagi', 'Akita', 'Yamagata', 'Fukushima'],
+                'kanto': ['Ibaraki', 'Tochigi', 'Gunma', 'Saitama', 'Chiba', 'Tokyo', 'Kanagawa'],
+                'chubu': ['Niigata', 'Toyama', 'Ishikawa', 'Fukui', 'Yamanashi', 'Nagano', 'Gifu', 'Shizuoka', 'Aichi'],
+                'kansai': ['Mie', 'Shiga', 'Kyoto', 'Osaka', 'Hyōgo', 'Nara', 'Wakayama'],
+                'chugoku': ['Tottori', 'Shimane', 'Okayama', 'Hiroshima', 'Yamaguchi'],
+                'shikoku': ['Tokushima', 'Kagawa', 'Ehime', 'Kochi'],
+                'kyushu': ['Fukuoka', 'Saga', 'Nagasaki', 'Kumamoto', 'Oita', 'Miyazaki', 'Kagoshima', 'Okinawa']
+            };
+
+            let totalProperties = 0;
+            let visitedProperties = 0;
+
+            if (regionPrefectures[region]) {
+                regionPrefectures[region].forEach(function(prefecture) {
+                    const properties = culturalPropertiesData[prefecture] || [];
+                    totalProperties += properties.length;
+
+                    properties.forEach(function(property) {
+                        const propertyId = `${property.prefecture}-${property.name}`;
+                        if (clickedProperties.has(propertyId)) {
+                            visitedProperties++;
+                        }
+                    });
+                });
+            }
+
+            return { visited: visitedProperties, total: totalProperties };
+        }
+
+        // 更新圖例顯示統計
+        function updateLegendStats() {
+            const regions = ['hokkaido', 'tohoku', 'kanto', 'chubu', 'kansai', 'chugoku', 'shikoku', 'kyushu'];
+
+            regions.forEach(function(region) {
+                const legendItem = document.querySelector(`[data-region="${region}"] .legend-text`);
+                if (legendItem) {
+                    const stats = getRegionStats(region);
+                    // 提取基礎地區名稱（移除括號部分）
+                    let baseText = legendItem.textContent;
+                    if (baseText.includes('(')) {
+                        baseText = baseText.split('(')[0].trim();
+                    }
+
+                    // 使用HTML結構讓統計數字變小
+                    legendItem.innerHTML = `${baseText} <span style="font-size: 0.85em; color: #6c757d;">(${stats.visited}/${stats.total})</span>`;
+                }
+            });
+        }
+
+        // 檢查同地區其他有文化財產的縣是否都至少有一個被拜訪
+        function shouldRegionBeColored(region) {
+            // 按地區整理都道府縣
+            const regionPrefectures = {
+                'hokkaido': ['Hokkaido'],
+                'tohoku': ['Aomori', 'Iwate', 'Miyagi', 'Akita', 'Yamagata', 'Fukushima'],
+                'kanto': ['Ibaraki', 'Tochigi', 'Gunma', 'Saitama', 'Chiba', 'Tokyo', 'Kanagawa'],
+                'chubu': ['Niigata', 'Toyama', 'Ishikawa', 'Fukui', 'Yamanashi', 'Nagano', 'Gifu', 'Shizuoka', 'Aichi'],
+                'kansai': ['Mie', 'Shiga', 'Kyoto', 'Osaka', 'Hyōgo', 'Nara', 'Wakayama'],
+                'chugoku': ['Tottori', 'Shimane', 'Okayama', 'Hiroshima', 'Yamaguchi'],
+                'shikoku': ['Tokushima', 'Kagawa', 'Ehime', 'Kochi'],
+                'kyushu': ['Fukuoka', 'Saga', 'Nagasaki', 'Kumamoto', 'Oita', 'Miyazaki', 'Kagoshima', 'Okinawa']
+            };
+
+            if (!regionPrefectures[region]) return false;
+
+            const prefecturesInRegion = regionPrefectures[region];
+            const prefecturesWithProperties = [];
+
+            // 找出該地區有文化財產的縣
+            prefecturesInRegion.forEach(function(prefecture) {
+                const properties = culturalPropertiesData[prefecture] || [];
+                if (properties.length > 0) {
+                    prefecturesWithProperties.push(prefecture);
+                }
+            });
+
+            // 如果該地區沒有任何縣有文化財產，返回false
+            if (prefecturesWithProperties.length === 0) {
+                return false;
+            }
+
+            // 檢查每個有文化財產的縣是否都至少有一個被拜訪
+            return prefecturesWithProperties.every(function(prefecture) {
+                return hasVisitedPropertiesInPrefecture(prefecture);
+            });
+        }
+
+        // 更新地圖顏色
+        function updateMapColors() {
+            const svg = d3.select("#japan-map");
+            svg.selectAll('path.prefecture')
+                .attr('fill', function(d) {
+                    const prefectureName = d.properties.NAME_1;
+                    const region = prefectureRegions[prefectureName];
+
+                    // 檢查這個縣是否有被訪問過的文化財產
+                    if (hasVisitedPropertiesInPrefecture(prefectureName)) {
+                        return regionColors[region]; // 顯示該地區的顏色
+                    } else {
+                        // 如果該縣沒有被訪問的文化財產，檢查同地區是否應該上色
+                        if (shouldRegionBeColored(region)) {
+                            return regionColors[region]; // 顯示該地區的顏色
+                        } else {
+                            return '#f8f9fa'; // 保持白色
+                        }
+                    }
+                });
+        }
+
+        // 生成指定地區的表格數據
+        function generateRegionTableData(region) {
+            // 都道府縣日文名稱對應
+            const prefectureJapaneseNames = {
+                'Hokkaido': '北海道',
+                'Aomori': '青森県', 'Iwate': '岩手県', 'Miyagi': '宮城県', 'Akita': '秋田県', 'Yamagata': '山形県', 'Fukushima': '福島県',
+                'Ibaraki': '茨城県', 'Tochigi': '栃木県', 'Gunma': '群馬県', 'Saitama': '埼玉県', 'Chiba': '千葉県', 'Tokyo': '東京都', 'Kanagawa': '神奈川県',
+                'Niigata': '新潟県', 'Toyama': '富山県', 'Ishikawa': '石川県', 'Fukui': '福井県', 'Yamanashi': '山梨県', 'Nagano': '長野県', 'Gifu': '岐阜県', 'Shizuoka': '静岡県', 'Aichi': '愛知県',
+                'Mie': '三重県', 'Shiga': '滋賀県', 'Kyoto': '京都府', 'Osaka': '大阪府', 'Hyōgo': '兵庫県', 'Nara': '奈良県', 'Wakayama': '和歌山県',
+                'Tottori': '鳥取県', 'Shimane': '島根県', 'Okayama': '岡山県', 'Hiroshima': '広島県', 'Yamaguchi': '山口県',
+                'Tokushima': '徳島県', 'Kagawa': '香川県', 'Ehime': '愛媛県', 'Kochi': '高知県',
+                'Fukuoka': '福岡県', 'Saga': '佐賀県', 'Nagasaki': '長崎県', 'Kumamoto': '熊本県', 'Oita': '大分県', 'Miyazaki': '宮崎県', 'Kagoshima': '鹿児島県', 'Okinawa': '沖縄県'
+            };
+
+            // 地區日文名稱
+            const regionTitles = {
+                'hokkaido': '北海道地方',
+                'tohoku': '東北地方',
+                'kanto': '関東地方',
+                'chubu': '中部地方',
+                'kansai': '近畿地方',
+                'chugoku': '中国地方',
+                'shikoku': '四国地方',
+                'kyushu': '九州地方'
+            };
+
+            // 按地區整理都道府縣
+            const regionPrefectures = {
+                'hokkaido': ['Hokkaido'],
+                'tohoku': ['Aomori', 'Iwate', 'Miyagi', 'Akita', 'Yamagata', 'Fukushima'],
+                'kanto': ['Ibaraki', 'Tochigi', 'Gunma', 'Saitama', 'Chiba', 'Tokyo', 'Kanagawa'],
+                'chubu': ['Niigata', 'Toyama', 'Ishikawa', 'Fukui', 'Yamanashi', 'Nagano', 'Gifu', 'Shizuoka', 'Aichi'],
+                'kansai': ['Mie', 'Shiga', 'Kyoto', 'Osaka', 'Hyōgo', 'Nara', 'Wakayama'],
+                'chugoku': ['Tottori', 'Shimane', 'Okayama', 'Hiroshima', 'Yamaguchi'],
+                'shikoku': ['Tokushima', 'Kagawa', 'Ehime', 'Kochi'],
+                'kyushu': ['Fukuoka', 'Saga', 'Nagasaki', 'Kumamoto', 'Oita', 'Miyazaki', 'Kagoshima', 'Okinawa']
+            };
+
+
+            // 生成表格
+            const table = document.getElementById('unified-table');
+            let tableHTML = `
+                <thead>
+                    <tr>
+                        <th>都道府県</th>
+                        <th>重要伝統的建造物群保存地区</th>
+                        <th>種別</th>
+                        <th>拜訪過</th>
+                    </tr>
+                </thead>
+                <tbody>
+            `;
+
+            regionPrefectures[region].forEach(function(prefecture) {
+                const properties = culturalPropertiesData[prefecture] || [];
+                const prefectureJapanese = prefectureJapaneseNames[prefecture];
+
+                if (properties.length > 0) {
+                    properties.forEach(function(property, index) {
+                        const propertyId = `${property.prefecture}-${property.name}`;
+                        const isVisited = clickedProperties.has(propertyId);
+                        const checkedClass = isVisited ? 'checked' : '';
+
+                        tableHTML += `
+                            <tr>
+                                <td class="prefecture-name">${index === 0 ? prefectureJapanese : ''}</td>
+                                <td class="cultural-property-name clickable-property" data-property-name="${property.name}" data-prefecture="${property.prefecture}" data-property-type="${property.type}" data-description="${property.description || ''}" data-image-file-name="${property.imageFileName || ''}" data-image-copyright="${property.imageCopyright || ''}">${property.name}</td>
+                                <td class="cultural-property-type">${property.type}</td>
+                                <td class="visit-column" data-property-id="${propertyId}">
+                                    <span class="visit-checkbox ${checkedClass}"></span>
+                                </td>
+                            </tr>
+                        `;
+                    });
+                } else {
+                    tableHTML += `
+                        <tr>
+                            <td class="prefecture-name">${prefectureJapanese}</td>
+                            <td colspan="3" style="color: #6c757d; font-style: italic;">登錄資料なし</td>
+                        </tr>
+                    `;
+                }
+            });
+
+            tableHTML += '</tbody>';
+            table.innerHTML = tableHTML;
+
+            // 為拜訪過欄位添加點擊事件
+            table.querySelectorAll('.visit-column').forEach(function(visitCell) {
+                visitCell.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const propertyId = this.getAttribute('data-property-id');
+                    const checkbox = this.querySelector('.visit-checkbox');
+
+                    if (!clickedProperties.has(propertyId)) {
+                        // 第一次點擊該項目，加分
+                        clickedProperties.add(propertyId);
+                        checkbox.classList.add('checked');
+                        score++;
+                        updateScore();
+                    } else {
+                        // 已點擊過的項目，取消選擇並扣分
+                        clickedProperties.delete(propertyId);
+                        checkbox.classList.remove('checked');
+                        score--;
+                        updateScore();
+                    }
+
+                    // 更新地圖顏色和圖例統計
+                    updateMapColors();
+                    updateLegendStats();
+                });
+            });
+
+            // 為文化財產名稱添加點擊事件
+            table.querySelectorAll('.clickable-property').forEach(function(propertyCell) {
+                propertyCell.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const propertyName = this.getAttribute('data-property-name');
+                    const prefecture = this.getAttribute('data-prefecture');
+                    const propertyType = this.getAttribute('data-property-type');
+                    const description = this.getAttribute('data-description');
+                    const imageFileName = this.getAttribute('data-image-file-name');
+                    const imageCopyright = this.getAttribute('data-image-copyright');
+
+                    showSimpleModal(propertyName, prefecture, propertyType, description, imageFileName, imageCopyright);
+                });
+            });
+        }
+
+        // 摺疊功能
+        function initCollapsible() {
+            const triggers = document.querySelectorAll('.collapsible-trigger');
+            const unifiedCollapse = document.getElementById('unified-collapse');
+
+            triggers.forEach(function(trigger) {
+                trigger.addEventListener('click', function() {
+                    const region = this.getAttribute('data-region');
+
+                    // 檢查是否點擊了已經啟動的地區
+                    const isCurrentlyActive = this.classList.contains('active');
+
+                    // 先清除所有的active狀態
+                    document.querySelectorAll('.collapsible-trigger.active').forEach(function(activeTrigger) {
+                        activeTrigger.classList.remove('active');
+                    });
+
+                    if (isCurrentlyActive) {
+                        // 如果點擊的是已經啟動的地區，則關閉摺疊內容
+                        unifiedCollapse.classList.remove('show');
+                    } else {
+                        // 否則啟動新的地區，生成表格並顯示摺疊內容
+                        this.classList.add('active');
+                        generateRegionTableData(region);
+                        unifiedCollapse.classList.add('show');
+                    }
+                });
+            });
+        }
+
+        // 等待數據載入完成後初始化摺疊功能
+        Promise.all([
+            d3.json('gadm41_JPN_1.json'),
+            d3.csv('cultural_properties.csv')
+        ]).then(function([japan, csvData]) {
+            // 初始化摺疊功能
+            setTimeout(function() {
+                initCollapsible();
+            }, 100);
+        });
+    </script>
+</body>
+</html>
