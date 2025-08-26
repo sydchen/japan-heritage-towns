@@ -450,6 +450,27 @@
             margin-top: 20px;
         }
 
+        .region-container {
+            display: contents;
+        }
+
+        /* 桌面版設定 */
+        .desktop-unified-collapse {
+            display: block;
+        }
+
+        @media (min-width: 769px) {
+            /* 桌面版隱藏個別地區的 collapse-content */
+            .region-container .collapse-content {
+                display: none !important;
+            }
+            
+            /* 桌面版顯示統一的 collapse-content */
+            .desktop-unified-collapse {
+                display: block;
+            }
+        }
+
         .legend-item {
             display: flex;
             align-items: center;
@@ -914,6 +935,25 @@
                 font-size: 10px;
             }
 
+            .legend {
+                grid-template-columns: 1fr;
+            }
+
+            .region-container {
+                display: block;
+                margin-bottom: 10px;
+            }
+
+            /* 手機版隱藏桌面版統一 collapse-content */
+            .desktop-unified-collapse {
+                display: none !important;
+            }
+            
+            /* 手機版顯示個別地區的 collapse-content */
+            .region-container .collapse-content {
+                display: block;
+            }
+
         }
 
         @media (max-width: 480px) {
@@ -988,57 +1028,113 @@
         </div>
 
         <div class="legend">
-            <div class="legend-item collapsible-trigger" data-region="hokkaido">
-                <div class="legend-color" style="background-color: #f39c12;"></div>
-                <span class="legend-text">北海道地方</span>
-                <span class="collapse-icon">▼</span>
+            <div class="region-container">
+                <div class="legend-item collapsible-trigger" data-region="hokkaido">
+                    <div class="legend-color" style="background-color: #f39c12;"></div>
+                    <span class="legend-text">北海道地方</span>
+                    <span class="collapse-icon">▼</span>
+                </div>
+                <div class="collapse-content" id="collapse-hokkaido">
+                    <div class="region-table-container">
+                        <table class="region-table" id="table-hokkaido"></table>
+                    </div>
+                </div>
             </div>
 
-            <div class="legend-item collapsible-trigger" data-region="tohoku">
-                <div class="legend-color" style="background-color: #39c0ed;"></div>
-                <span class="legend-text">東北地方</span>
-                <span class="collapse-icon">▼</span>
+            <div class="region-container">
+                <div class="legend-item collapsible-trigger" data-region="tohoku">
+                    <div class="legend-color" style="background-color: #39c0ed;"></div>
+                    <span class="legend-text">東北地方</span>
+                    <span class="collapse-icon">▼</span>
+                </div>
+                <div class="collapse-content" id="collapse-tohoku">
+                    <div class="region-table-container">
+                        <table class="region-table" id="table-tohoku"></table>
+                    </div>
+                </div>
             </div>
 
-            <div class="legend-item collapsible-trigger" data-region="kanto">
-                <div class="legend-color" style="background-color: #ff6b6b;"></div>
-                <span class="legend-text">関東地方</span>
-                <span class="collapse-icon">▼</span>
+            <div class="region-container">
+                <div class="legend-item collapsible-trigger" data-region="kanto">
+                    <div class="legend-color" style="background-color: #ff6b6b;"></div>
+                    <span class="legend-text">関東地方</span>
+                    <span class="collapse-icon">▼</span>
+                </div>
+                <div class="collapse-content" id="collapse-kanto">
+                    <div class="region-table-container">
+                        <table class="region-table" id="table-kanto"></table>
+                    </div>
+                </div>
             </div>
 
-            <div class="legend-item collapsible-trigger" data-region="chubu">
-                <div class="legend-color" style="background-color: #95e1d3;"></div>
-                <span class="legend-text">中部地方</span>
-                <span class="collapse-icon">▼</span>
+            <div class="region-container">
+                <div class="legend-item collapsible-trigger" data-region="chubu">
+                    <div class="legend-color" style="background-color: #95e1d3;"></div>
+                    <span class="legend-text">中部地方</span>
+                    <span class="collapse-icon">▼</span>
+                </div>
+                <div class="collapse-content" id="collapse-chubu">
+                    <div class="region-table-container">
+                        <table class="region-table" id="table-chubu"></table>
+                    </div>
+                </div>
             </div>
 
-            <div class="legend-item collapsible-trigger" data-region="kansai">
-                <div class="legend-color" style="background-color: #ffd93d;"></div>
-                <span class="legend-text">近畿地方</span>
-                <span class="collapse-icon">▼</span>
+            <div class="region-container">
+                <div class="legend-item collapsible-trigger" data-region="kansai">
+                    <div class="legend-color" style="background-color: #ffd93d;"></div>
+                    <span class="legend-text">近畿地方</span>
+                    <span class="collapse-icon">▼</span>
+                </div>
+                <div class="collapse-content" id="collapse-kansai">
+                    <div class="region-table-container">
+                        <table class="region-table" id="table-kansai"></table>
+                    </div>
+                </div>
             </div>
 
-            <div class="legend-item collapsible-trigger" data-region="chugoku">
-                <div class="legend-color" style="background-color: #bb8fce;"></div>
-                <span class="legend-text">中国地方</span>
-                <span class="collapse-icon">▼</span>
+            <div class="region-container">
+                <div class="legend-item collapsible-trigger" data-region="chugoku">
+                    <div class="legend-color" style="background-color: #bb8fce;"></div>
+                    <span class="legend-text">中国地方</span>
+                    <span class="collapse-icon">▼</span>
+                </div>
+                <div class="collapse-content" id="collapse-chugoku">
+                    <div class="region-table-container">
+                        <table class="region-table" id="table-chugoku"></table>
+                    </div>
+                </div>
             </div>
 
-            <div class="legend-item collapsible-trigger" data-region="shikoku">
-                <div class="legend-color" style="background-color: #f8c471;"></div>
-                <span class="legend-text">四国地方</span>
-                <span class="collapse-icon">▼</span>
+            <div class="region-container">
+                <div class="legend-item collapsible-trigger" data-region="shikoku">
+                    <div class="legend-color" style="background-color: #f8c471;"></div>
+                    <span class="legend-text">四国地方</span>
+                    <span class="collapse-icon">▼</span>
+                </div>
+                <div class="collapse-content" id="collapse-shikoku">
+                    <div class="region-table-container">
+                        <table class="region-table" id="table-shikoku"></table>
+                    </div>
+                </div>
             </div>
 
-            <div class="legend-item collapsible-trigger" data-region="kyushu">
-                <div class="legend-color" style="background-color: #e08766;"></div>
-                <span class="legend-text">九州地方</span>
-                <span class="collapse-icon">▼</span>
+            <div class="region-container">
+                <div class="legend-item collapsible-trigger" data-region="kyushu">
+                    <div class="legend-color" style="background-color: #e08766;"></div>
+                    <span class="legend-text">九州地方</span>
+                    <span class="collapse-icon">▼</span>
+                </div>
+                <div class="collapse-content" id="collapse-kyushu">
+                    <div class="region-table-container">
+                        <table class="region-table" id="table-kyushu"></table>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- 統一的摺疊內容區域 -->
-        <div class="collapse-content" id="unified-collapse">
+        <!-- 桌面版統一的摺疊內容區域 -->
+        <div class="collapse-content desktop-unified-collapse" id="unified-collapse">
             <div class="region-table-container">
                 <table class="region-table" id="unified-table"></table>
             </div>
@@ -1497,6 +1593,9 @@
 
             // 初始化圖例統計
             updateLegendStats();
+            
+            // 初始化摺疊功能
+            initCollapsible();
         }).catch(function(error) {
             console.error('載入資料失敗:', error);
             infoDisplay.innerHTML = '地圖或文化財產資料載入失敗，請檢查檔案';
@@ -1880,9 +1979,10 @@
 
         // 更新table中checkbox狀態的函數
         function updateTableCheckboxes() {
-            const table = document.getElementById('unified-table');
-            if (table) {
-                const visitColumns = table.querySelectorAll('.visit-column');
+            // 更新桌面版統一表格
+            const unifiedTable = document.getElementById('unified-table');
+            if (unifiedTable) {
+                const visitColumns = unifiedTable.querySelectorAll('.visit-column');
                 visitColumns.forEach(function(visitCell) {
                     const propertyId = visitCell.getAttribute('data-property-id');
                     const checkbox = visitCell.querySelector('.visit-checkbox');
@@ -1896,6 +1996,27 @@
                     }
                 });
             }
+
+            // 更新手機版各地區獨立表格
+            const regions = ['hokkaido', 'tohoku', 'kanto', 'chubu', 'kansai', 'chugoku', 'shikoku', 'kyushu'];
+            regions.forEach(function(region) {
+                const regionTable = document.getElementById(`table-${region}`);
+                if (regionTable) {
+                    const visitColumns = regionTable.querySelectorAll('.visit-column');
+                    visitColumns.forEach(function(visitCell) {
+                        const propertyId = visitCell.getAttribute('data-property-id');
+                        const checkbox = visitCell.querySelector('.visit-checkbox');
+
+                        if (propertyId && checkbox) {
+                            if (clickedProperties.has(propertyId)) {
+                                checkbox.classList.add('checked');
+                            } else {
+                                checkbox.classList.remove('checked');
+                            }
+                        }
+                    });
+                }
+            });
         }
 
         // 檢查某個縣是否有被訪問過的文化財產
@@ -2027,7 +2148,7 @@
         }
 
         // 生成指定地區的表格數據
-        function generateRegionTableData(region) {
+        function generateRegionTableData(region, targetTableId) {
             // 都道府縣日文名稱對應
             const prefectureJapaneseNames = {
                 'Hokkaido': '北海道',
@@ -2038,18 +2159,6 @@
                 'Tottori': '鳥取県', 'Shimane': '島根県', 'Okayama': '岡山県', 'Hiroshima': '広島県', 'Yamaguchi': '山口県',
                 'Tokushima': '徳島県', 'Kagawa': '香川県', 'Ehime': '愛媛県', 'Kochi': '高知県',
                 'Fukuoka': '福岡県', 'Saga': '佐賀県', 'Nagasaki': '長崎県', 'Kumamoto': '熊本県', 'Oita': '大分県', 'Miyazaki': '宮崎県', 'Kagoshima': '鹿児島県', 'Okinawa': '沖縄県'
-            };
-
-            // 地區日文名稱
-            const regionTitles = {
-                'hokkaido': '北海道地方',
-                'tohoku': '東北地方',
-                'kanto': '関東地方',
-                'chubu': '中部地方',
-                'kansai': '近畿地方',
-                'chugoku': '中国地方',
-                'shikoku': '四国地方',
-                'kyushu': '九州地方'
             };
 
             // 按地區整理都道府縣
@@ -2064,9 +2173,8 @@
                 'kyushu': ['Fukuoka', 'Saga', 'Nagasaki', 'Kumamoto', 'Oita', 'Miyazaki', 'Kagoshima', 'Okinawa']
             };
 
-
             // 生成表格
-            const table = document.getElementById('unified-table');
+            const table = document.getElementById(targetTableId || 'unified-table');
             let tableHTML = `
                 <thead>
                     <tr>
@@ -2156,6 +2264,11 @@
             });
         }
 
+        // 檢查是否為手機版
+        function isMobileView() {
+            return window.innerWidth <= 768;
+        }
+
         // 摺疊功能
         function initCollapsible() {
             const triggers = document.querySelectorAll('.collapsible-trigger');
@@ -2164,38 +2277,58 @@
             triggers.forEach(function(trigger) {
                 trigger.addEventListener('click', function() {
                     const region = this.getAttribute('data-region');
-
-                    // 檢查是否點擊了已經啟動的地區
                     const isCurrentlyActive = this.classList.contains('active');
 
-                    // 先清除所有的active狀態
-                    document.querySelectorAll('.collapsible-trigger.active').forEach(function(activeTrigger) {
-                        activeTrigger.classList.remove('active');
-                    });
+                    if (isMobileView()) {
+                        // 手機版邏輯：在各地區下方展開
+                        const collapseElement = document.getElementById(`collapse-${region}`);
+                        const tableId = `table-${region}`;
 
-                    if (isCurrentlyActive) {
-                        // 如果點擊的是已經啟動的地區，則關閉摺疊內容
-                        unifiedCollapse.classList.remove('show');
+                        // 先關閉所有其他地區
+                        document.querySelectorAll('.collapsible-trigger').forEach(function(otherTrigger) {
+                            if (otherTrigger !== trigger) {
+                                const otherRegion = otherTrigger.getAttribute('data-region');
+                                const otherCollapseElement = document.getElementById(`collapse-${otherRegion}`);
+                                otherTrigger.classList.remove('active');
+                                if (otherCollapseElement) {
+                                    otherCollapseElement.classList.remove('show');
+                                }
+                            }
+                        });
+
+                        if (isCurrentlyActive) {
+                            this.classList.remove('active');
+                            if (collapseElement) {
+                                collapseElement.classList.remove('show');
+                            }
+                        } else {
+                            this.classList.add('active');
+                            generateRegionTableData(region, tableId);
+                            if (collapseElement) {
+                                collapseElement.classList.add('show');
+                            }
+                        }
                     } else {
-                        // 否則啟動新的地區，生成表格並顯示摺疊內容
-                        this.classList.add('active');
-                        generateRegionTableData(region);
-                        unifiedCollapse.classList.add('show');
+                        // 桌面版邏輯：使用統一底部展開區域
+                        // 先清除所有的active狀態
+                        document.querySelectorAll('.collapsible-trigger.active').forEach(function(activeTrigger) {
+                            activeTrigger.classList.remove('active');
+                        });
+
+                        if (isCurrentlyActive) {
+                            // 如果點擊的是已經啟動的地區，則關閉摺疊內容
+                            unifiedCollapse.classList.remove('show');
+                        } else {
+                            // 否則啟動新的地區，生成表格並顯示摺疊內容
+                            this.classList.add('active');
+                            generateRegionTableData(region, 'unified-table');
+                            unifiedCollapse.classList.add('show');
+                        }
                     }
                 });
             });
         }
 
-        // 等待數據載入完成後初始化摺疊功能
-        Promise.all([
-            d3.json('gadm41_JPN_1.json'),
-            d3.csv('cultural_properties.csv')
-        ]).then(function([japan, csvData]) {
-            // 初始化摺疊功能
-            setTimeout(function() {
-                initCollapsible();
-            }, 100);
-        });
     </script>
 </body>
 </html>

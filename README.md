@@ -11,7 +11,6 @@
 - 文化遺產資料和圖片僅用於教育和文化保護目的。所有版權均歸其各自所有者所有。
 
 
-
 ## Demo
 
 [日本 - 重要伝統的建造物群保存地区](https://sydchen.github.io/japan-heritage-towns/)
